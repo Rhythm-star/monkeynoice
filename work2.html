@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>基于RNNoise的濒危灵长类生态监测与降噪系统 - 我们的工作</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <!-- Header Section -->
+   <header >
+        <div class="hh1" style="display: flex;justify-content: space-between;">
+            <div class="hh2" style="display: flex;justify-content: center;">
+                <div class="logo">
+                    <img src="img/logo.png" alt="无法加载图片">
+                </div>
+                <div class="topic" style="margin: 15px;color: white;font-weight: bold;font-size: 20px;width: 500px;">
+                    <p>基于RNNoise的濒危灵长类生态监测与降噪系统</p>
+                </div>
+            </div>
+            <div class="nav">
+                <ul class="navlist">
+                    <li class="btli"><a href="home.html">首页</a></li>
+                    <li class="btli"><a href="home.html#background">项目介绍</a></li>
+                    <li class="btli"><a href="work.html" class="btli">我们的工作</a>
+                        <ul class="droplist">
+                            <li><a href="work.html">关于叶猴</a></li>
+                            <li><a href="work1.html">叶猴声音</a></li>
+                            <li><a href="work2.html">降噪展示</a></li>
+                            <li><a href="work3.html">困难与展望</a></li>
+                        </ul>
+                    </li>
+                    <li class="btli"><a href="#team">团队成员</a></li>  
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section id="work" class="work">
+        <h2>我们的工作</h2>
+        <div class="work-item fadeIn">
+            <h3>3.对叶猴声音的识别与降噪</h3>
+            <!-- 触发音频播放的图片 -->
+            <div class="vbox">
+                <div class="image">
+                    <img src="voice/pic1.png" alt="无法加载图片" style="width: 600px;">
+                </div>
+                <div class="vbox1">
+                    <div class="vboxt">   
+                    <p>关于白头叶猴的声音, 大家也可能想不到, 白头叶猴可爱的外表下, 却是与其他猿猴截然不同的声音, 左图是我们未降噪的图像, 我们将音频采样率为44100Hz ,图中标注了我们所需要去除的噪声</p>
+                    </div> 
+                <audio controls>
+                    <source src="voice/noisy1.wav"  type="audio/wav">
+                </audio>
+                </div>
+            </div>
+            <div class="vbox">
+                <div class="image">
+                    <img src="voice/pic2.png" alt="无法加载图片" style="width: 600px;">
+                </div>
+                <div class="vbox1">
+                    <div class="vboxt">   
+                    <p>关于白头叶猴声音降噪, 旨在帮助我们完成对于从被动声学获取的杂乱无序的音频提取出干净的叶猴声音, 左图是我们已降噪的图像, 我们将音频从44100Hz进行重采样至8000Hz, 在保证白头叶猴叫声不失真的情况下滤除绝大多数的噪声</p>
+                    </div> 
+                <audio controls>
+                    <source src="voice/clean1_.wav"  type="audio/wav">
+                </audio> 
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- Team Members Section -->
+    <section id="team" class="team">
+        <h2>我们的团队</h2>
+		<div class="box">
+			<div class="team-member">
+				<h3>李咏豪</h3>
+				<p>队长</p>
+				<p>电子与通信工程学院</p>
+			</div>
+			<div class="team-member">
+				<h3>刘昊</h3>
+				<p>队员</p>
+				<p>电子与通信工程学院</p>
+			</div>
+			<div class="team-member">
+				<h3>邓凯元</h3>
+				<p>队员</p>
+				<p>电子与通信工程学院</p>
+			</div>
+			<div class="team-member">
+				<h3>杨智勇</h3>
+				<p>队员</p>
+				<p>电子与通信工程学院</p>
+			</div>
+			<div class="team-member">
+				<h3>林启聪</h3>
+				<p>队员</p>
+				<p>电子与通信工程学院</p>
+			</div>
+		</div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>团队结语:</h2>
+		<br>
+        <p>叶猴声音降噪绝非简单的“技术清洗”，而是打通生态数据价值链的关键环节——从噪声中挖掘出生物行为的真相，让科技真正服务于自然保护。项目若能结合具体保护场景（如针对保护区痛点），我们坚信这个项目将为守护濒危物种的做出不可磨灭的贡献!</p>
+        <p>数据来源: 中国广西崇左白头叶猴国家级自然保护区,(一般基于猴王的叫声, 因其余白头叶猴的发声机会较少, 且难以人为捕捉)</p>
+    </section>
+	<script>
+		// function resethtmlfontsize(){
+		// 	document.ddocumentElement.style.fontSize=screen.width /10 +'px';	
+		// }
+		// resethtmlfontsize();
+		// window.onresize = resethtmlfontsize();
+        window.addEventListener('scroll', function() {
+        var workSection = document.querySelector('#team');
+        var position = workSection.getBoundingClientRect();
+        if (position.top < window.innerHeight) {
+            workSection.classList.add('fadeIn');
+        }
+    });
+         
+	</script>
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2025 保护野生动物声音降噪项目</p>
+    </footer>
+
+</body>
+</html>
+

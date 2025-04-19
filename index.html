@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>白头叶猴保护平台 - 登录</title>
+    <link rel="stylesheet" href="wangye.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- ======= 新增光影层 ======= -->
+    <div class="light-effects">
+        <div class="glow-circle blue" style="top:20%; left:10%"></div>
+        <div class="glow-circle purple" style="top:70%; right:15%"></div>
+    </div>
+    <!-- 新增视频背景 -->
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="./videos/bg-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <div class="card-logo">
+            <img src="wangyelogo.png" alt="白头叶猴保护平台">
+        </div>
+        <div class="glassmorphism-card">
+            <!-- 登录表单 -->
+            <div class="form-box login">
+                <div class="cyber-border"></div>  
+                <form action="#">
+                    <h1 class="hologram-title">守护者认证</h1>
+                    <div class="input-box">
+                        <input type="text" placeholder="守护者ID" class="neon-input" required>
+                        <div class="input-glow"></div>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="密码" class="neon-input" required>
+                        <i class='bx bxs-lock-alt'></i>
+                    </div>
+                    <div class="forgot-link neon-link">
+                        <a href="#" class="cyber-glow">忘记密码？</a>
+                    </div>
+                    <button class="quantum-btn">
+                        <span class="btn-glow"></span>
+                        <span>安全登录</span>
+                    </button>                
+                </form>
+            </div>
+
+            <div class="toggle-panel toggle-left">
+                <h1>🐒 欢迎来到白头叶猴守护区！</h1>
+                <p>还没有守护者账号？</p>
+                <!-- 注册按钮，跳转到注册页面 -->
+                <button class="btn register-btn" onclick="window.location.href='index1.html'">立即注册</button>
+                <!-- 新增科技说明文字 -->
+                <div class="neon-footer">
+                    <p>--基于RNNoise的濒危灵长类生态监测与降噪系统</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 通用的 fetch 请求函数
+        async function apiRequest(url, method, body = null) {
+            try {
+                const options = {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                };
+                if (body) {
+                    options.body = JSON.stringify(body);
+                }
+
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || '请求失败');
+                }
+                return await response.json();
+            } catch (error) {
+                alert(error.message);
+                throw error; // 继续抛出错误以便调用方处理
+            }
+        }
+
+        // 登录事件监听器
+        document.querySelector('.quantum-btn').addEventListener('click', async function (event) {
+            event.preventDefault(); // 阻止默认表单提交行为
+
+            // 获取用户输入的 ID 和密码
+            const userId = document.querySelector('input[placeholder="守护者ID"]').value;
+            const password = document.querySelector('input[placeholder="密码"]').value;
+
+            // 检查输入是否为空
+            if (!userId || !password) {
+                alert('请输入守护者ID和密码');
+                return;
+            }
+
+            try {
+                // 调用登录接口
+                const data = await apiRequest('https://ijuyrbtxaqtk.sealoshzh.site/login', 'POST', {
+                    username: userId,
+                    password: password,
+                });
+
+                // 登录成功后的处理
+                alert('登录成功！');
+                console.log('用户信息:', data);
+                window.location.href = 'index1.html'; // 跳转到注册页面
+            } catch (error) {
+                console.error('登录失败:', error);
+            }
+        });
+    </script>
+</body>
+</html>
