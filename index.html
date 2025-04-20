@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,12 +29,12 @@
                 <form action="#">
                     <h1 class="hologram-title">守护者认证</h1>
                     <div class="input-box">
-                        <input type="text" placeholder="守护者ID" class="neon-input" required>
+                        <input type="text" placeholder="守护者ID" class="neon-input" required id="username">
                         <div class="input-glow"></div>
                         <i class='bx bxs-user'></i>
                     </div>
                     <div class="input-box">
-                        <input type="password" placeholder="密码" class="neon-input" required>
+                        <input type="password" placeholder="密码" class="neon-input" required id="password">
                         <i class='bx bxs-lock-alt'></i>
                     </div>
                     <div class="forgot-link neon-link">
@@ -42,7 +42,7 @@
                     </div>
                     <button class="quantum-btn">
                         <span class="btn-glow"></span>
-                        <span>安全登录</span>
+                        <span onclick="verify()">安全登录</a></span>
                     </button>                
                 </form>
             </div>
@@ -61,60 +61,30 @@
     </div>
 
     <script>
-        // 通用的 fetch 请求函数
-        async function apiRequest(url, method, body = null) {
-            try {
-                const options = {
-                    method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                };
-                if (body) {
-                    options.body = JSON.stringify(body);
-                }
+        const API_BASE_URL = 'http://localhost:5000/api';
+async function verify() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-                const response = await fetch(url, options);
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || '请求失败');
-                }
-                return await response.json();
-            } catch (error) {
-                alert(error.message);
-                throw error; // 继续抛出错误以便调用方处理
-            }
-        }
-
-        // 登录事件监听器
-        document.querySelector('.quantum-btn').addEventListener('click', async function (event) {
-            event.preventDefault(); // 阻止默认表单提交行为
-
-            // 获取用户输入的 ID 和密码
-            const userId = document.querySelector('input[placeholder="守护者ID"]').value;
-            const password = document.querySelector('input[placeholder="密码"]').value;
-
-            // 检查输入是否为空
-            if (!userId || !password) {
-                alert('请输入守护者ID和密码');
-                return;
-            }
-
-            try {
-                // 调用登录接口
-                const data = await apiRequest('https://ijuyrbtxaqtk.sealoshzh.site/login', 'POST', {
-                    username: userId,
-                    password: password,
-                });
-
-                // 登录成功后的处理
-                alert('登录成功！');
-                console.log('用户信息:', data);
-                window.location.href = 'index1.html'; // 跳转到注册页面
-            } catch (error) {
-                console.error('登录失败:', error);
-            }
+    try {
+        const response = await fetch(`${API_BASE_URL}/verify`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
         });
+        const data = await response.json();
+        alert(data.message);
+        
+        // 如果登录成功，跳转到服务器响应的 redirect_url
+        if (data.success) {
+            window.location.href = data.redirect_url;
+        }
+    } catch (error) {
+        alert('验证请求失败');
+    }
+}
     </script>
 </body>
 </html>
