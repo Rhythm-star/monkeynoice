@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - 白头叶猴保护平台</title>
+    <link rel="stylesheet" href="wangye.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- ======= 新增光影层 ======= -->
+    <div class="light-effects">
+        <div class="glow-circle blue" style="top:20%; left:10%"></div>
+        <div class="glow-circle purple" style="top:70%; right:15%"></div>
+    </div>
+    <!-- 新增视频背景 -->
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="./videos/bg-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <div class="card-logo">
+            <img src="wangyelogo.png" alt="白头叶猴保护平台">
+        </div>
+        <div class="glassmorphism-card">
+            <!-- 注册表单 -->
+            <div class="form-box register">
+                <form action="#">
+                    <h1>🌱 成为保护者</h1>
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" class="neon-input" required id="username">
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <i class='bx bxs-lock-alt'></i>
+                        <input type="password" placeholder="Password" class="neon-input" required id="password">
+                        <div class="input-glow"></div>
+                    </div>
+                    <button type="submit" class="btn register-submit-btn" onclick="register()">注册</button>
+                </form>
+            </div>
+            <div class="toggle-panel toggle-left">
+                <h1>🐒 欢迎来到白头叶猴守护区！</h1>
+                <p>还没有守护者账号？</p>
+                <!-- 注册按钮，跳转到注册页面 -->
+                <button class="btn register-btn" onclick="window.location.href='index.html'">返回登录界面</button>
+                <!-- 新增科技说明文字 -->
+                <div class="neon-footer">
+                    <p>--基于RNNoise的濒危灵长类生态监测与降噪系统</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+          const API_BASE_URL = 'https://108yz8np24910.vicp.fun:443/api';
+
+async function register() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+        const data = await response.json();
+        alert(data.message);
+        
+        // 如果注册成功，跳转到登录页面
+        if (response.ok) {
+            window.location.href = 'index.html';
+        }
+    } catch (error) {
+        alert('注册请求失败');
+    }
+}
+
+    </script>
+</body>
+</html>

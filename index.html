@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>白头叶猴保护平台 - 登录</title>
+    <link rel="stylesheet" href="wangye.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- ======= 新增光影层 ======= -->
+    <div class="light-effects">
+        <div class="glow-circle blue" style="top:20%; left:10%"></div>
+        <div class="glow-circle purple" style="top:70%; right:15%"></div>
+    </div>
+    <!-- 新增视频背景 -->
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="./videos/bg-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <div class="card-logo">
+            <img src="wangyelogo.png" alt="白头叶猴保护平台">
+        </div>
+        <div class="glassmorphism-card">
+            <!-- 登录表单 -->
+            <div class="form-box login">
+                <div class="cyber-border"></div>  
+                <form action="#">
+                    <h1 class="hologram-title">守护者认证</h1>
+                    <div class="input-box">
+                        <input type="text" placeholder="守护者ID" class="neon-input" required id="username">
+                        <div class="input-glow"></div>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="密码" class="neon-input" required id="password">
+                        <i class='bx bxs-lock-alt'></i>
+                    </div>
+                    <div class="forgot-link neon-link">
+                        <a href="#" class="cyber-glow">忘记密码？</a>
+                    </div>
+                    <button class="quantum-btn">
+                        <span class="btn-glow"></span>
+                        <span onclick="verify()">安全登录</a></span>
+                    </button>                
+                </form>
+            </div>
+
+            <div class="toggle-panel toggle-left">
+                <h1>🐒 欢迎来到白头叶猴守护区！</h1>
+                <p>还没有守护者账号？</p>
+                <!-- 注册按钮，跳转到注册页面 -->
+                <button class="btn register-btn" onclick="window.location.href='index1.html'">立即注册</button>
+                <!-- 新增科技说明文字 -->
+                <div class="neon-footer">
+                    <p>--基于RNNoise的濒危灵长类生态监测与降噪系统</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://108yz8np24910.vicp.fun:443/api';
+async function verify() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/verify`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+        const data = await response.json();
+        alert(data.message);
+        
+        // 如果登录成功，跳转到服务器响应的 redirect_url
+        if (data.success) {
+            window.location.href = data.redirect_url;
+        }
+    } catch (error) {
+        alert('验证请求失败');
+    }
+}
+    </script>
+</body>
+</html>
